@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyNotes | Premium Engineering Notes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#8B5CF6',
+                        dark: '#1E293B',
+                        download: '#EC4899',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(120deg, #3B82F6, #10B981);
+        }
+
+        .download-gradient {
+            background: linear-gradient(120deg, #EC4899, #8B5CF6);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.1), 0 10px 10px -5px rgba(59, 130, 246, 0.04);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            min-width: 200px;
+            z-index: 50;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .preview-overlay {
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .preview-container:hover .preview-overlay {
+            opacity: 1;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(236, 72, 153, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(236, 72, 153, 0);
+            }
+        }
+
+        .bounce {
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .progress-bar {
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .text-shadow {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .blob {
+            border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+            animation: morph 8s linear infinite;
+        }
+
+        @keyframes morph {
+
+            0%,
+            100% {
+                border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+            }
+
+            25% {
+                border-radius: 45% 55% 30% 70% / 55% 30% 70% 45%;
+            }
+
+            50% {
+                border-radius: 30% 70% 55% 45% / 30% 65% 35% 70%;
+            }
+
+            75% {
+                border-radius: 65% 35% 35% 65% / 40% 60% 40% 60%;
+            }
+        }
+
+        .download-progress {
+            transition: width 0.5s ease;
+        }
+
+        .shimmer {
+            background: linear-gradient(90deg,
+                    rgba(255, 255, 255, 0) 0%,
+                    rgba(255, 255, 255, 0.2) 50%,
+                    rgba(255, 255, 255, 0) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -200% 0;
+            }
+
+            100% {
+                background-position: 200% 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans text-gray-800 bg-gray-50">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-2">
+                <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z">
+                    </path>
+                </svg>
+                <span class="text-xl font-bold text-dark">Dipmola by<span class="text-primary"> Abhi</span></span>
+            </a>
+
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="#" class="text-dark hover:text-primary font-medium transition-colors duration-200">Home</a>
+
+                <div class="dropdown relative">
+                    <button
+                        class="text-dark hover:text-primary font-medium flex items-center transition-colors duration-200">
+                        Subjects
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </button>
+                    <div class="dropdown-content bg-white shadow-lg rounded-lg mt-2 py-2">
+                        <div class="grid grid-cols-2 gap-2 p-3">
+                            <div>
+                                <h3 class="font-semibold text-sm text-gray-500 mb-2">BRANCHES</h3>
+                                <a href="#"
+                                    class="block px-4 py-2 hover:bg-gray-100 rounded transition-colors duration-200">Mechanical</a>
+                                <a href="#"
+                                    class="block px-4 py-2 hover:bg-gray-100 rounded transition-colors duration-200">Civil</a>
+                                <a href="#"
+                                    class="block px-4 py-2 hover:bg-gray-100 rounded transition-colors duration-200">Electrical</a>
+                                <a href="#"
+                                    class="block px-4 py-2 hover:bg-gray-100 rounded transition-colors duration-200">Computer</a>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-sm text-gray-500 mb-2">SEMESTERS</h3>
+                                <a href="#"
+                                    class="block px-4 py-2 hover:bg-gray-100 rounded transition-colors duration-200">Semester
+                                    1</a>
+                                <a href="#"
+                                    class="block px-4 py-2 hover:bg-gray-100 rounded transition-colors duration-200">Semester
+                                    2</a>
+                                <a href="#"
+                                    class="block px-4 py-2 hover:bg-gray-100 rounded transition-colors duration-200">Semester
+                                    3</a>
+                                <a href="#"
+                                    class="block px-4 py-2 hover:bg-gray-100 rounded transition-colors duration-200">Semester
+                                    4</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#buy-notes" class="text-dark hover:text-primary font-medium transition-colors duration-200">Buy
+                    Notes</a>
+                <a href="#free-samples"
+                    class="text-dark hover:text-primary font-medium transition-colors duration-200">Free Samples</a>
+                <a href="#micro-cheats"
+                    class="text-dark hover:text-primary font-medium transition-colors duration-200">Micro Cheats</a>
+                <a href="#testimonials"
+                    class="text-dark hover:text-primary font-medium transition-colors duration-200">Testimonials</a>
+                <a href="#contact"
+                    class="text-dark hover:text-primary font-medium transition-colors duration-200">Contact</a>
+                <a href="#about" class="text-dark hover:text-primary font-medium transition-colors duration-200">About
+                    Us</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <a href="#"
+                    class="hidden md:block bg-primary hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105">Sign
+                    In</a>
+
+                <button id="mobile-menu-button"
+                    class="md:hidden text-gray-500 hover:text-primary transition-colors duration-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="container mx-auto px-4 py-2 space-y-1">
+                <a href="#" class="block px-3 py-2 rounded-md hover:bg-gray-100 transition-colors duration-200">Home</a>
+                <a href="#"
+                    class="block px-3 py-2 rounded-md hover:bg-gray-100 transition-colors duration-200">Subjects</a>
+                <a href="#buy-notes"
+                    class="block px-3 py-2 rounded-md hover:bg-gray-100 transition-colors duration-200">Buy Notes</a>
+                <a href="#free-samples"
+                    class="block px-3 py-2 rounded-md hover:bg-gray-100 transition-colors duration-200">Free Samples</a>
+                <a href="#micro-cheats"
+                    class="block px-3 py-2 rounded-md hover:bg-gray-100 transition-colors duration-200">Micro Cheats</a>
+                <a href="#testimonials"
+                    class="block px-3 py-2 rounded-md hover:bg-gray-100 transition-colors duration-200">Testimonials</a>
+                <a href="#contact"
+                    class="block px-3 py-2 rounded-md hover:bg-gray-100 transition-colors duration-200">Contact</a>
+                <a href="#about"
+                    class="block px-3 py-2 rounded-md hover:bg-gray-100 transition-colors duration-200">About Us</a>
+                <a href="#"
+                    class="block px-3 py-2 rounded-md bg-primary text-white text-center mt-2 transition-all duration-200 transform hover:scale-105">Sign
+                    In</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden bg-white">
+        <div class="container mx-auto px-4 py-16 md:py-24">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl font-bold text-dark leading-tight mb-4 text-shadow">
+                        Ace Your Diploma <span class="text-primary">Engineering</span> Exams
+                    </h1>
+                    <p class="text-lg text-gray-600 mb-8">
+                        Premium PDF notes created by Abhi. Clear, concise, and exam-focused.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#buy-notes"
+                            class="bg-primary hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z">
+                                </path>
+                            </svg>
+                            Browse Notes
+                        </a>
+                        <a href="#free-samples"
+                            class="bg-white border-2 border-primary text-primary hover:bg-gray-50 px-6 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
+                                <path fill-rule="evenodd"
+                                    d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                            Free Samples
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 relative">
+                    <div
+                        class="relative z-10 bg-white rounded-xl shadow-xl p-2 transform transition-all duration-500 hover:rotate-1">
+                        <svg class="w-full h-auto" viewBox="0 0 500 350" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="500" height="350" rx="8" fill="#f8fafc" />
+                            <rect x="40" y="40" width="420" height="60" rx="4" fill="#e2e8f0" />
+                            <rect x="60" y="60" width="180" height="20" rx="4" fill="#94a3b8" />
+                            <rect x="40" y="120" width="200" height="200" rx="4" fill="#e2e8f0" />
+                            <rect x="260" y="120" width="200" height="90" rx="4" fill="#e2e8f0" />
+                            <rect x="260" y="230" width="200" height="90" rx="4" fill="#e2e8f0" />
+                            <rect x="60" y="140" width="160" height="15" rx="2" fill="#94a3b8" />
+                            <rect x="60" y="165" width="120" height="10" rx="2" fill="#cbd5e1" />
+                            <rect x="60" y="185" width="140" height="10" rx="2" fill="#cbd5e1" />
+                            <rect x="60" y="205" width="130" height="10" rx="2" fill="#cbd5e1" />
+                            <rect x="60" y="240" width="100" height="30" rx="4" fill="#3B82F6" />
+                            <rect x="280" y="140" width="160" height="15" rx="2" fill="#94a3b8" />
+                            <rect x="280" y="165" width="120" height="10" rx="2" fill="#cbd5e1" />
+                            <rect x="280" y="250" width="160" height="15" rx="2" fill="#94a3b8" />
+                            <rect x="280" y="275" width="120" height="10" rx="2" fill="#cbd5e1" />
+                        </svg>
+                        <div
+                            class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-primary bg-opacity-10 rounded-full w-32 h-32 flex items-center justify-center">
+                            <div
+                                class="bg-primary text-white rounded-full w-16 h-16 flex items-center justify-center pulse">
+                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-secondary rounded-full opacity-20 blob"></div>
+                    <div class="absolute -top-6 -left-6 w-24 h-24 bg-accent rounded-full opacity-20 blob"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="bg-gray-100 py-8">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                    <div
+                        class="bg-white p-4 rounded-lg shadow-sm transform transition-all duration-300 hover:scale-105 hover:shadow-md">
+                        <div class="text-3xl font-bold text-primary">250+</div>
+                        <div class="text-gray-600">Students Helped</div>
+                    </div>
+                    <div
+                        class="bg-white p-4 rounded-lg shadow-sm transform transition-all duration-300 hover:scale-105 hover:shadow-md">
+                        <div class="text-3xl font-bold text-primary">10+</div>
+                        <div class="text-gray-600">PDF Notes</div>
+                    </div>
+                    <div
+                        class="bg-white p-4 rounded-lg shadow-sm transform transition-all duration-300 hover:scale-105 hover:shadow-md">
+                        <div class="text-3xl font-bold text-primary">92%</div>
+                        <div class="text-gray-600">Pass Rate</div>
+                    </div>
+                    <div
+                        class="bg-white p-4 rounded-lg shadow-sm transform transition-all duration-300 hover:scale-105 hover:shadow-md">
+                        <div class="text-3xl font-bold text-primary">4.8/5</div>
+                        <div class="text-gray-600">Student Rating</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Buy Notes Section -->
+    <section id="buy-notes" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-dark mb-4 text-shadow">Premium Engineering Notes</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Comprehensive, exam-focused notes created by Abhi. Clear explanations, diagrams, Suggestions and
+                    practice questions included.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Note Card 1 - Featured -->
+                <div
+                    class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 transition-all duration-300 card-hover">
+                    <div class="relative">
+                        <div
+                            class="bg-gradient-to-r from-blue-500 to-blue-600 text-white text-xs font-bold px-3 py-1 rounded-br-lg absolute top-0 left-0 z-10">
+                            BESTSELLER
+                        </div>
+                        <div class="preview-container relative">
+                            <svg class="w-full h-48 object-cover" viewBox="0 0 400 200" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <rect width="400" height="200" fill="#EBF4FF" />
+                                <rect x="40" y="30" width="320" height="20" rx="2" fill="#3B82F6" />
+                                <rect x="40" y="60" width="280" height="10" rx="2" fill="#93C5FD" />
+                                <rect x="40" y="80" width="300" height="10" rx="2" fill="#93C5FD" />
+                                <rect x="40" y="100" width="260" height="10" rx="2" fill="#93C5FD" />
+                                <rect x="40" y="130" width="100" height="40" rx="4" fill="#BFDBFE" />
+                                <rect x="150" y="130" width="100" height="40" rx="4" fill="#BFDBFE" />
+                                <rect x="260" y="130" width="100" height="40" rx="4" fill="#BFDBFE" />
+                                <path d="M100 150 L80 140 L120 140 Z" fill="#3B82F6" />
+                                <circle cx="200" cy="150" r="15" fill="#3B82F6" />
+                                <rect x="290" y="140" width="40" height="20" rx="2" fill="#3B82F6" />
+                            </svg>
+                            <div
+                                class="preview-overlay absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center">
+                                <button
+                                    class="bg-white text-primary hover:bg-gray-100 font-medium px-4 py-2 rounded-lg flex items-center transition-all duration-300 transform hover:scale-105">
+                                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                    Preview
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-dark">Advanced Manufacturing Process</h3>
+                            <span
+                                class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Mechanical</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Complete notes covering all the topics made according to the syllabus.
+                        </p>
+                        <div class="flex items-center text-sm text-gray-500 mb-4">
+                            <div class="flex items-center mr-4">
+                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                                    <path fill-rule="evenodd"
+                                        d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                250 views
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                Updated 1 weeks ago
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-dark">₹20</span>
+                            <button
+                                class="bg-primary hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 flex items-center"
+                                onclick="openProductModal()">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z">
+                                    </path>
+                                </svg>
+                                Buy Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Note Card 2 -->
+                <div
+                    class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 transition-all duration-300 card-hover">
+                    <div class="preview-container relative">
+                        <svg class="w-full h-48 object-cover" viewBox="0 0 400 200" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <rect width="400" height="200" fill="#F0FDF4" />
+                            <rect x="40" y="30" width="320" height="20" rx="2" fill="#10B981" />
+                            <rect x="40" y="60" width="280" height="10" rx="2" fill="#6EE7B7" />
+                            <rect x="40" y="80" width="300" height="10" rx="2" fill="#6EE7B7" />
+                            <rect x="40" y="100" width="260" height="10" rx="2" fill="#6EE7B7" />
+                            <rect x="40" y="130" width="320" height="40" rx="4" fill="#D1FAE5" />
+                            <path d="M80 150 L60 130 L100 130 Z" fill="#10B981" />
+                            <rect x="120" y="140" width="200" height="20" rx="2" fill="#10B981" />
+                        </svg>
+                        <div
+                            class="preview-overlay absolute inset-0 bg-secondary bg-opacity-80 flex items-center justify-center">
+                            <button
+                                class="bg-white text-secondary hover:bg-gray-100 font-medium px-4 py-2 rounded-lg flex items-center transition-all duration-300 transform hover:scale-105">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                Preview
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-dark">Automobile Engineering</h3>
+                            <span
+                                class="bg-orange-100 text-orange-800 text-xs font-medium px-2.5 py-0.5 rounded">Mechanical</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Comprehensive guide to the Automobile World.Suggestion paper included.
+                        </p>
+                        <div class="flex items-center text-sm text-gray-500 mb-4">
+                            <div class="flex items-center mr-4">
+                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                                    <path fill-rule="evenodd"
+                                        d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                197 views
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                Updated 1 week ago
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-dark">₹20</span>
+                            <button
+                                class="bg-secondary hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 flex items-center">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z">
+                                    </path>
+                                </svg>
+                                Buy Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Note Card 3 -->
+                <div
+                    class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 transition-all duration-300 card-hover">
+                    <div class="preview-container relative">
+                        <svg class="w-full h-48 object-cover" viewBox="0 0 400 200" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <rect width="400" height="200" fill="#F3E8FF" />
+                            <rect x="40" y="30" width="320" height="20" rx="2" fill="#8B5CF6" />
+                            <rect x="40" y="60" width="280" height="10" rx="2" fill="#C4B5FD" />
+                            <rect x="40" y="80" width="300" height="10" rx="2" fill="#C4B5FD" />
+                            <rect x="40" y="100" width="260" height="10" rx="2" fill="#C4B5FD" />
+                            <circle cx="80" cy="150" r="20" fill="#DDD6FE" />
+                            <circle cx="140" cy="150" r="20" fill="#DDD6FE" />
+                            <circle cx="200" cy="150" r="20" fill="#DDD6FE" />
+                            <circle cx="260" cy="150" r="20" fill="#DDD6FE" />
+                            <circle cx="320" cy="150" r="20" fill="#DDD6FE" />
+                            <path d="M80 150 L75 145 L85 145 Z" fill="#8B5CF6" />
+                            <rect x="135" y="145" width="10" height="10" rx="1" fill="#8B5CF6" />
+                            <circle cx="200" cy="150" r="5" fill="#8B5CF6" />
+                            <path d="M260 145 L255 155 L265 155 Z" fill="#8B5CF6" transform="rotate(180 260 150)" />
+                            <rect x="315" y="145" width="10" height="10" rx="1" fill="#8B5CF6" />
+                        </svg>
+                        <div
+                            class="preview-overlay absolute inset-0 bg-accent bg-opacity-80 flex items-center justify-center">
+                            <button
+                                class="bg-white text-accent hover:bg-gray-100 font-medium px-4 py-2 rounded-lg flex items-center transition-all duration-300 transform hover:scale-105">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                Preview
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-dark">Power Plant Engineering</h3>
+                            <span
+                                class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Mechanical</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Covers complete Power plant including real life examples with neat diagrams. Suggestions
+                            included.
+                        </p>
+                        <div class="flex items-center text-sm text-gray-500 mb-4">
+                            <div class="flex items-center mr-4">
+                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                                    <path fill-rule="evenodd"
+                                        d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                210 views
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                Updated 1 week ago
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-dark">₹20</span>
+                            <button
+                                class="bg-accent hover:bg-purple-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 flex items-center">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z">
+                                    </path>
+                                </svg>
+                                Buy Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="#"
+                    class="inline-flex items-center text-primary hover:text-blue-700 font-medium transition-all duration-300 transform hover:translate-x-2">
+                    View All Notes
+                    <svg class="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Free Samples Section -->
+    <section id="free-samples" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-dark mb-4 text-shadow">Try Before You Buy</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Download these free sample notes to experience the quality of our content before making a purchase.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Free Sample 1 -->
+                <div
+                    class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 transition-all duration-300 hover:shadow-md transform hover:scale-102">
+                    <div class="p-6">
+                        <div class="flex items-center justify-center mb-4">
+                            <svg class="w-12 h-12 text-primary float" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-dark text-center mb-2">Advanced Manufacturing Process</h3>
+                        <p class="text-gray-600 text-sm text-center mb-4">
+                            10-page sample. By Abhi
+                        </p>
+                        <button
+                            class="w-full bg-primary hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 flex items-center justify-center"
+                            onclick="simulateDownload('thermo-basics.pdf')">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                            Download Free
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Free Sample 2 -->
+                <div
+                    class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 transition-all duration-300 hover:shadow-md transform hover:scale-102">
+                    <div class="p-6">
+                        <div class="flex items-center justify-center mb-4">
+                            <svg class="w-12 h-12 text-secondary float" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-dark text-center mb-2">Automobile Engineering</h3>
+                        <p class="text-gray-600 text-sm text-center mb-4">
+                            15-page sample by Abhi
+                        </p>
+                        <button
+                            class="w-full bg-secondary hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 flex items-center justify-center"
+                            onclick="simulateDownload('c-programming.pdf')">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                            Download Free
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Free Sample 3 -->
+                <div
+                    class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 transition-all duration-300 hover:shadow-md transform hover:scale-102">
+                    <div class="p-6">
+                        <div class="flex items-center justify-center mb-4">
+                            <svg class="w-12 h-12 text-accent float" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-dark text-center mb-2">Power Plant Engineering</h3>
+                        <p class="text-gray-600 text-sm text-center mb-4">
+                            8-page sample by Abhi
+                        </p>
+                        <button
+                            class="w-full bg-accent hover:bg-purple-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 flex items-center justify-center"
+                            onclick="simulateDownload('electrical-circuits.pdf')">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                            Download Free
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Free Sample 4 -->
+                <div
+                    class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 transition-all duration-300 hover:shadow-md transform hover:scale-102">
+                    <div class="p-6">
+                        <div class="flex items-center justify-center mb-4">
+                            <svg class="w-12 h-12 text-blue-400 float" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-dark text-center mb-2">Fluid Mechanics Machinery</h3>
+                        <p class="text-gray-600 text-sm text-center mb-4">
+                            12-page sample by Abhi
+                        </p>
+                        <button
+                            class="w-full bg-blue-400 hover:bg-blue-500 text-white px-4 py-2 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 flex items-center justify-center"
+                            onclick="simulateDownload('soil-mechanics.pdf')">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                            Download Free
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Micro Cheats Section -->
+    <section id="micro-cheats" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-dark mb-4 text-shadow">Micro Cheats & Assignments</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Quick guide, formula sheets, and assignment help to boost your grades.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Micro Cheat 1 -->
+                <div
+                    class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 shadow-sm border border-blue-200 transition-all duration-300 transform hover:scale-102 hover:shadow-md">
+                    <div class="flex items-center mb-4">
+                        <svg class="w-8 h-8 text-primary mr-3" fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z">
+                            </path>
+                        </svg>
+                        <h3 class="text-xl font-bold text-dark">Formula Sheets</h3>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        Compact formula sheets for quick reference during exams. All important equations in one place.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-blue-200 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">AMP</span>
+                        <span class="bg-blue-200 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">PPE</span>
+                        <span class="bg-blue-200 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">FMM</span>
+                        <span class="bg-blue-200 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">AE</span>
+                    </div>
+                    <button
+                        class="w-full bg-primary hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 flex items-center justify-center">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        View Formula Sheets
+                    </button>
+                </div>
+
+                <!-- Micro Cheat 2 -->
+                <div
+                    class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 shadow-sm border border-green-200 transition-all duration-300 transform hover:scale-102 hover:shadow-md">
+                    <div class="flex items-center mb-4">
+                        <svg class="w-8 h-8 text-secondary mr-3" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        <h3 class="text-xl font-bold text-dark">Assignment Help</h3>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        Step-by-step solutions to common assignment problems. Improve your problem-solving skills.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span
+                            class="bg-green-200 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">CAD/CAM</span>
+                        <span
+                            class="bg-green-200 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Programming</span>
+                        <span class="bg-green-200 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Advanced
+                            PDF</span>
+                        <span class="bg-green-200 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Power Point
+                            Project</span>
+                    </div>
+                    <button
+                        class="w-full bg-secondary hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 flex items-center justify-center">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        Browse Assignments
+                    </button>
+                </div>
+
+                <!-- Micro Cheat 3 -->
+                <div
+                    class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6 shadow-sm border border-purple-200 transition-all duration-300 transform hover:scale-102 hover:shadow-md">
+                    <div class="flex items-center mb-4">
+                        <svg class="w-8 h-8 text-accent mr-3" fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z">
+                            </path>
+                        </svg>
+                        <h3 class="text-xl font-bold text-dark">Exam Prep Kits</h3>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        Last-minute revision guides with important questions, concepts, and quick tips for exams.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-purple-200 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">VIVA
+                            Prep</span>
+                        <span class="bg-purple-200 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">Quick
+                            Revision</span>
+                        <span class="bg-purple-200 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">Important
+                            Q&A</span>
+                        <span
+                            class="bg-purple-200 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">Diagrams</span>
+                    </div>
+                    <button
+                        class="w-full bg-accent hover:bg-purple-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 flex items-center justify-center">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        Get Exam Kits
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download All Section -->
+    <section id="download-all" class="py-16 bg-gradient-to-r from-download to-accent text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4 text-shadow">Download Complete Engineering Package
+                    </h2>
+                    <p class="text-lg opacity-90 mb-8">
+                        Get all our premium engineering notes, formula sheets, and exam prep materials in one
+                        comprehensive package.
+                    </p>
+
+                    <div
+                        class="bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-xl p-6 mb-8 glass-effect">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                            <div class="flex items-center">
+                                <svg class="w-6 h-6 mr-2 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                <span>5 PDF Notes</span>
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-6 h-6 mr-2 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                <span>50+ Formula Sheets</span>
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-6 h-6 mr-2 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                <span>5 Exam Prep Kits</span>
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-6 h-6 mr-2 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Solved Assignments</span>
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-6 h-6 mr-2 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Practice Questions</span>
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-6 h-6 mr-2 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Last Minute Suggestion</span>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col md:flex-row items-center justify-center gap-4">
+                            <div class="text-center md:text-left">
+                                <div class="text-lg opacity-80">Regular Price: <span class="line-through">₹299</span>
+                                </div>
+                                <div class="text-3xl font-bold">Special Offer: ₹199</div>
+                            </div>
+                            <button id="download-all-btn"
+                                class="bg-white text-download hover:bg-gray-100 px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 flex items-center">
+                                <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                Download Complete Package
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="text-sm opacity-80">
+                        One-time payment. No subscription. Access on all your devices.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Modal -->
+    <div id="download-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center modal">
+        <div class="bg-white rounded-xl p-6 max-w-md w-full mx-4 modal-content">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-dark">Downloading Package</h3>
+                <button id="close-modal" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="
+                            window.__CF$cv$params={r:'9593798b72bc4bfb',t:'MTc1MTUxNTIxNS4wMDAwMDA='};var a=document.createElement('
+                            script');a.nonce='' ;a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js'
+                            ;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var
+                            a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute'
+                            ;a.style.top=0;a.style.left=0;a.style.border='none' ;a.style.visibility='hidden'
+                            ;document.body.appendChild(a);if('loading'!==document.readyState)c();else
+                            if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var
+                            e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
